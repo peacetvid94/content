@@ -1,0 +1,675 @@
+
+  hr {
+    background-color: #ddd;
+    height:2px;
+    margin-top:-8.5px;
+    margin-bottom:10px;
+    color: #ddd;
+    fill: #ddd;
+  }
+  img {
+    pointer-events: none !important;
+  }
+  .putih {
+    background-color: #eee;
+    border-radius: 3px;
+  }
+      
+      
+        /* Custom CSS for Video Player and Sidebar Layout */
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-family: 'Teko', sans-serif; /* Menggunakan font Teko dari Google Fonts */
+        }
+        #main-content {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        .video-container {
+            flex: 1;
+            background-color: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            /* Menggunakan rasio 16:9 dengan padding-bottom */
+            padding-bottom: 56.25%; /* Rasio 16:9 */
+            height: 0;
+        }
+
+        .video-wrapper iframe,
+        .video-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Tetap menggunakan cover untuk memastikan video mengisi seluruh wadah */
+        }
+      	#player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #18191c; /* Optional: background hitam untuk player */
+          	display: none;
+        }
+        .channel-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #1b262c, #2c3e50, #34495e, #3a3a52);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Menyesuaikan dengan elemen induk */
+            box-sizing: border-box; /* Memastikan padding tidak menambah lebar total */
+            margin-bottom: 2px;
+        }
+
+        .logo-container {
+            flex-shrink: 0;
+            width: 80px;
+            height: 55px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .info-container {
+            margin-left: 10px;
+        }
+
+        .channel-name {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .status {
+            margin: 0;
+            font-size: 15px;
+            color: #0f9386;
+        }
+
+        .channel-container:hover,
+        .channel-container.selected {
+            background: linear-gradient(135deg, #2b3842, #3b5267, #46556c, #50505b);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-wrapper {
+             position: absolute;
+             width: 100%;
+             backdrop-filter: blur(1.6px);
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             color: white;
+             font-size: 1.3em !important;
+             text-align: center;
+             background-color: rgba(0, 0, 0, 0.5);
+             padding: 30%;
+             border-radius: 10px;
+        }
+         .countdown-title {
+             margin-bottom: 10px;
+             font-weight: bold;
+        }
+         .countdown-titles {
+             display: none;
+             font-size: 0.9em;
+             letter-spacing: 3px;
+             margin-top: 10px;
+        }
+         .countdown-timer {
+             letter-spacing: 5px;
+             font-size: 2em;
+             font-weight: 600;
+             line-height: 0.1;
+             margin-top: 20px;
+        }
+      	.sidebar {
+            flex: 0 0 400px; /* Lebar tetap untuk sidebar */
+            background-color: #000;
+            padding: 0; /* Menghilangkan padding */
+            overflow-y: auto; /* Memungkinkan scroll vertikal jika diperlukan */
+            overflow-x: hidden; /* Mencegah scroll horizontal */
+            height: 100vh;
+            box-sizing: border-box; /* Menyertakan padding dalam perhitungan lebar */
+            display: flex;
+            flex-direction: column;
+          	z-index:1;
+        }
+
+        /* CSS untuk menu-wrapper di atas */
+        .menu-wrapper-top {
+            background-color: #000; /* Warna latar yang solid */
+            padding: 0; /* Padding seragam di semua sisi */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Bayangan untuk kedalaman visual */
+            border-bottom: 1px solid #ccc; /* Garis batas untuk memperjelas pemisahan */
+            position: sticky; /* Membuat menu tetap di atas saat di-scroll */
+            top: 0; /* Menempel di atas */
+            z-index: 100; /* Memastikan menu berada di atas isi lainnya */
+            width: 100%; /* Memastikan mengisi lebar sidebar */
+        }
+
+        /* Tombol Refresh - warna abu-abu */
+        .menu-wrapper-bottom .refresh-button {
+            background-color: rgba(15,147,134,0.774); /* Warna*/
+            backdrop-filter: blur(12px);
+        }
+
+        .menu-wrapper-bottom .refresh-button:hover {
+            box-shadow: inset 0 -4px 0 0 #18191c; /* Warna abu-abu yang lebih gelap saat hover */
+        }
+
+        /* Tombol Telegram - warna biru */
+        .menu-wrapper-bottom .telegram-button {
+            background-color: rgba(15,147,134,0.774);
+            backdrop-filter: blur(12px);
+            /*background-color: #0088cc; /* Warna biru sesuai Telegram */
+        }
+
+        /*.menu-wrapper-bottom .telegram-button:hover {
+            box-shadow: inset 0 -4px 0 0 #18191c; /* Warna biru yang lebih gelap saat hover 
+        }*/
+
+        /* Umum untuk semua tombol di menu-wrapper-bottom */
+        .menu-wrapper-bottom .menu-button {
+            flex: 1; /* Pastikan tombol membagi ruang secara merata */
+            text-align: center; /* Memusatkan teks dan ikon */
+            padding: 10px 0; /* Padding untuk kenyamanan pengguna */
+            color: white; /* Warna teks */
+            border: none; /* Menghilangkan border */
+            cursor: pointer; /* Menampilkan kursor pointer saat hover */
+            transition: background-color 0.3s; /* Transisi halus untuk efek hover */
+            margin: 0; /* Menghilangkan margin antar tombol */
+            border-left: 1px solid #ffffff; /* Garis pemisah antar tombol */
+            font-family: 'Teko', sans-serif; /* Menambahkan properti font-family */
+        }
+
+        .menu-wrapper-bottom .menu-button:first-child {
+            border-left: none; /* Menghilangkan garis pemisah pada tombol pertama */
+        }
+
+        .menu-wrapper-bottom .menu-button i {
+            margin-right: 8px; /* Jarak antara ikon dan teks */
+        }
+
+        .menu-container {
+            display: flex;
+            width: 100%; /* Memastikan mengisi lebar wrapper */
+            margin: 0; /* Menghilangkan margin default */
+            padding: 0; /* Menghilangkan padding default */
+            border-top: 1px solid #ccc;
+        }
+
+      	.fa-solid {margin-right: 5px;}
+        .menu-button {
+            flex: 1; /* Ensures each button has the same width */
+            text-align: center; /* Centering the text inside the buttons */
+            padding: 8px 0; /* Padding for button for better touch */
+            /*border-bottom: 2px solid #18191c !important; */
+            background-color: rgba(15,147,134,0.774); /* Warna*/
+            /*backdrop-filter: blur(12px);*/
+            color: white; /* Text color */
+            border: none; /* Removes border */
+            cursor: pointer; /* Shows a pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+            margin: 0; /* Menghilangkan margin antar tombol */
+            border-left: 1px solid #ccc; /* Garis pemisah antar tombol */
+            font-family: 'Teko', sans-serif; /* Menambahkan properti font-family */
+            box-shadow: inset 0 0 0 0 #18191c;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.5s;
+}
+
+        .menu-button:first-child {
+            border-left: none; /* Menghilangkan garis pemisah pada tombol pertama */
+        }
+
+        .menu-button:hover {
+          box-shadow: inset 0 -4px 0 0 #18191c;
+        }
+
+        .sidebar-content {
+            flex-grow: 1;
+            /* Let content take the remaining space */
+            padding: 2px;
+            /* Padding around content for better spacing */
+            display: none;
+            /* Hide by default */
+            overflow-y: auto;
+            /* Ensures only this part is scrollable */
+            background:
+                repeating-linear-gradient(45deg, #0000 calc(-650%/13) calc(50%/13), #0099990f 0 calc(100%/13),
+                    #0000 0 calc(150%/13), #0099990f 0 calc(200%/13),
+                    #0000 0 calc(250%/13), #0099990f 0 calc(300%/13)), repeating-linear-gradient(45deg, #0000 calc(-650%/13) calc(50%/13), #0099990f 0 calc(100%/13),
+                    #0000 0 calc(150%/13), #0099990f 0 calc(200%/13),
+                    #0000 0 calc(250%/13), #0099990f 0 calc(300%/13)) 32px 32px,
+                repeating-linear-gradient(-45deg, #0000 calc(-650%/13) calc(50%/13), #0099990f 0 calc(100%/13),
+                    #0000 0 calc(150%/13), #0099990f 0 calc(200%/13),
+                    #0000 0 calc(250%/13), #0099990f 0 calc(300%/13)), repeating-linear-gradient(-45deg, #0000 calc(-650%/13) calc(50%/13), #0099990f 0 calc(100%/13),
+                    #0000 0 calc(150%/13), #0099990f 0 calc(200%/13),
+                    #0000 0 calc(250%/13), #0099990f 0 calc(300%/13)) 32px 32px #0099990f;
+            background-size: 64px 64px;
+        }
+
+        .sidebar-content.active {
+            display: block;
+            /* Show active content */
+        }
+
+        .event-container {
+            position: relative;
+            background: linear-gradient(135deg, #1b262c, #2c3e50, #34495e, #3a3a52);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .event-container:hover, .event-container.hover-effect {
+            background: linear-gradient(135deg, #2b3842, #3b5267, #46556c, #50505b);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .live-label {
+            display: none;
+            background: none;
+            position: absolute;
+            top: 0;
+            margin-top: 78px;
+            right: 30%;
+            left: 30%;
+            color: red;
+            padding: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+            border-radius: 10px;
+        }
+        
+        .live-label b  {
+            display: flex;
+            padding:1px;
+            flex-wrap: wrap;
+            gap: 7px;
+            justify-content: center;
+        }
+
+        .live-label i  {
+            font-size: 16px;
+            margin-right: -3px;
+            color: red;
+            animation: bounce 1s infinite;
+        }
+
+ /*icon gerak*/
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(2px);
+    }
+    50% {
+        transform: translateX(-2px);
+    }
+}
+
+        .server-buttons {
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #18191c;
+            border-radius: 5px;
+        }
+
+        .server-buttons .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .server-button {
+            background-color: #0f9386;
+            padding: 5px 10px;
+            font-size: 0.75em;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            /* flex: 1; */
+            max-width: 80px; /* Lebar maksimal untuk tombol */
+        }
+
+        .server-button.active {
+            background-color: #0f93865b;
+        }
+
+        .server-button:hover {
+            background-color: #0f93865b;
+        }
+
+        .instruction {
+            font-size: 0.75em;
+            color: white;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 100%;
+        }
+      	.instructio-n:after {
+            content: 'Kamu dapat memilih server lain :';
+            color: white; /* set color to original text color */
+            margin-left: -110px;
+    	}
+
+        h2 {
+            margin-top: -10px;
+            margin-bottom: 68px;
+            font-size: 0.9em;
+            font-weight: 700;
+            text-align: center;
+            /*background-color: #393a3f;*/
+            background-color: #ffffff2c;
+            color: #fff;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom: 1px solid rgba(32,178,170,.7);
+            margin-right: 15%;
+            margin-left: 15%;
+            position: relative;
+            display: flex;
+            padding:3px;;
+            padding-right:8px;;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .sport-icon {
+            width: 20px !important;
+            height: 17.0938px !important;
+            /*width: 18.5 px; height: 15px;
+            margin-right: 0px;*/
+        }
+
+        .team {
+            font-size: 1.1em;
+          	padding: 2px 0;
+            display: flex;
+            align-items: center;
+            /* margin: 10px 0; */
+        }
+
+        .team1-name {
+           position: absolute;
+            top: 0;
+            margin-top: 78px;
+            left: 0;
+            width: 37.5%;
+            text-align: center;
+        }
+        .team2-name {
+           position: absolute;
+            top: 0;
+            margin-top: 78px;
+            right: 0;
+            width: 37.5%;
+            text-align: center;
+        }
+        .team1-logo {
+            position: absolute;
+            top: 0;
+            margin-top: 30px;
+            left: 11.5%;
+            width: 40px;
+            height: 43px;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-radius: 8px;
+            /*background-color: #ffffff2c;*/
+            padding: 1.5px;
+        }
+        .team2-logo {
+            position: absolute;
+            top: 0;
+            margin-top: 30px;
+            right: 11.5%;
+            width: 40px;
+            height: 43px;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-radius: 8px;
+            /*background-color: #ffffff2c;*/
+            padding: 1.5px;
+        }
+
+        .wib {
+            position: absolute;
+            top: 50;
+            right: 30%;
+            left: 30%;
+            text-align: center ;
+            /* margin-top: 10px; */
+            font-size: 1em;
+        }
+        
+        .match-date, .match-time {
+          display: none;
+        }
+        .kickoff-match-time {
+            position: absolute;
+            top: 0;
+            margin-top: 60px;
+            right: 30%;
+            left: 32%;
+            text-align: center;
+            /*padding-right: 0px;
+            /*margin-top: 10px; */
+            font-size: 1em;
+        }
+
+        .kickoff-match-date {
+            position: absolute;
+            top: 0;
+            margin-top: 40px;
+            right: 30%;
+            left: 32%;
+            text-align: center;
+            /* margin-top: 5px; */
+            font-size: 1em;
+        }
+
+        .chat-iframe {
+            width: 100%;
+            height: 98%; /* Make the iframe fill the entire height of the sidebar content */
+            border: none;
+            overflow: hidden;
+        }
+
+        .event-container .team-logo1, .event-container .team-logo2 {
+            width: 24px; /* Ukuran logo lebih besar */
+            height: auto;
+            margin-right: 10px;
+        }
+/*
+        .event-container .team-logo2 {
+            background-color: #ffff0000;
+        }
+*/
+        .event-container .team1, .event-container .team2 {
+            display: flex;
+            align-items: center;
+            /* margin: 10px 0; */
+        }
+/*
+        .event-container .team2 {
+            color: #ffff0000;
+        }
+
+        .event-container .team2:hover {
+            color: #ffff0000;
+        }
+*/
+
+        @media (max-width: 768px) {
+            #main-content {
+                flex-direction: column;
+                display: flex;
+                height: 100vh;
+            }
+            .video-container {
+                width: 100%;
+                position: relative;
+                padding-top: 56.25%;
+            }
+            .video-wrapper {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 2px;
+                box-sizing: border-box;
+                overflow-y: auto;
+                flex-shrink: 0;
+                flex-grow: 1;
+                min-height: calc(100vh - 56.25vw);
+            }
+            .menu-button {
+                margin-bottom: 2px;
+            }
+            .chat-iframe {
+                height: 63vh; /* Make the iframe fill the entire height of the sidebar content */
+                border: none;
+            }
+            .countdown-wrapper {
+                font-size: 20px;
+            }
+            #spacer {
+                height: 100px; /* Sesuaikan nilai tinggi ini untuk memastikan sidebar tidak menimpa navbar */
+                width: 100%;
+                background: transparent; /* Pastikan div ini tidak terlihat */
+            }
+            /* Tambahan untuk memastikan menu-wrapper-bottom berada di atas navbar */
+            .menu-wrapper-bottom {
+                position: fixed; /* Pastikan posisi fixed agar selalu di atas navbar */
+                bottom: env(safe-area-inset-bottom); /* Sesuaikan dengan safe area */
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 2147483647; !important;
+        /* Pastikan z-index cukup tinggi */
+         inset: auto 0px 0px auto !important;
+         padding-bottom: calc(0px + env(safe-area-inset-bottom));
+        /* Menambahkan padding bawah */
+            }
+        }
+
+        .logo-container-vod {
+            flex-shrink: 0;
+            margin-left: 10px;
+            width: 55px;
+            height: 80px;
+            border: 1px solid #797979;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 2px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .info-container-vod {
+            margin-left: 20px;
+        }
+        .channel-name-vod {
+            margin: 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+        .status-vod {
+            margin: 0;
+            font-size: 20px;
+            color: #fff;
+        }  
+
+        .marq {
+          /*text-align: center;*/
+          	pointer-events: none;
+          	font-weight:bold;
+          	z-index:-1;
+          margin-bottom: -5px;
+          	/*background-color: #18191c;*/
+            border-top: 1px solid #ccc;
+            border-bottom: .7px solid #ccc; /* Garis batas untuk memperjelas pemisahan */
+        }
+      
+/* define the animation */
+	@-webkit-keyframes marquee {
+	  0%   { -webkit-transform: translate(0, 0); }
+	  100% { -webkit-transform: translate(0, -200%); }
+	} 
+    @keyframes marquee {
+	  0%   { -webkit-transform: translate(0, 0); }
+	  100% { -webkit-transform: translate(0, -100%); }
+	} 
+	
+
+	
+	/* define your limiting container */
+	.marquee {
+      font-size:1.3em;
+      text-align: center;
+	  
+	  white-space: nowrap;
+	  overflow: hidden;
+	  box-sizing: border-box;
+    height: 25px;
+	}
+	/* this is the tray moving around your container */
+	.marquee span {
+	  display: inline-block;
+    padding-top: 20px;
+    
+	  text-indent: 0;
+	  animation: marquee 15s linear infinite; /* here you select the animation */
+      -webkit-animation: marquee 15s linear infinite; /* here you select the animation */
+	}
+	/* pause the animation on mouse over */
+	.marquee span:hover {
+	  animation-play-state: paused;
+      -webkit-animation-play-state: paused;
+	}
